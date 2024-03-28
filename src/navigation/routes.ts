@@ -3,6 +3,7 @@ const authRoute = {
 };
 const mainRoute = {
   welcomeScreen: 'WelcomeScreen',
+  homeScreen: 'HomeScreen',
 };
 
 export { authRoute, mainRoute };

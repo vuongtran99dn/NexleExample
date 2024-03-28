@@ -1,6 +1,6 @@
 import { authReducerName } from '@/redux/slices/authSlice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { signInApi, signUpApi } from '@/services/api/authApi';
+import { getCategoriesApi, signInApi, signUpApi } from '@/services/api/authApi';
 import { signInPayload, signUpPayload } from '@/services/api/authApi/types';
 import { showToastMessage } from '@/functions';
 
@@ -43,3 +43,16 @@ export const signIn = createAsyncThunk(
     }
   },
 );
+
+export const getCategories = createAsyncThunk(`${authReducerName}/CATEGORIES`, async (_, { rejectWithValue }) => {
+  try {
+    const { data, status } = await getCategoriesApi();
+    if (status !== 200) {
+      rejectWithValue(false);
+      return;
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});

@@ -5,11 +5,13 @@ import styles from './styles';
 
 interface headerProps {
   onPress?: () => void;
+  rightComponent?: React.ReactNode;
 }
-const Header: React.FC<headerProps> = ({ onPress }) => {
+const Header: React.FC<headerProps> = ({ onPress, rightComponent }) => {
   return (
     <View style={styles.container}>
       <Icon name="chevron-left" style={styles.iconBack} onPress={onPress} />
+      {rightComponent && rightComponent}
     </View>
   );
 };

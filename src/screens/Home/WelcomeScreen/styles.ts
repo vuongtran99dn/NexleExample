@@ -9,9 +9,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.BACKGROUND,
     padding: 10,
   },
+  done: { fontSize: 14, color: textColors.WHITE },
   linearBackground: { width: width, height: height, position: 'absolute' },
   textWellcome: { fontSize: 22, color: textColors.WHITE, marginTop: 80, marginBottom: 10 },
   desc: { fontSize: 14, color: textColors.WHITE },
+  flatList: {
+    marginTop: 10,
+  },
 });
 
 export default styles;

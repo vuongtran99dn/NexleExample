@@ -1,4 +1,5 @@
-import { signIn, signUp } from '@/redux/thunks/authThunk';
+import { getCategories, signIn, signUp } from '@/redux/thunks/authThunk';
+import { category } from '@/services/api/authApi/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
@@ -8,6 +9,8 @@ export interface authState {
   accessToken: string | null;
   refreshToken: string | null;
   isLoading: boolean;
+  categories: category[];
+  selectedCategories: category[];
 }
 
 const initialState: authState = {
@@ -15,6 +18,8 @@ const initialState: authState = {
   accessToken: null,
   refreshToken: null,
   isLoading: false,
+  categories: [],
+  selectedCategories: [],
 };
 
 export const authReducerName = 'AUTH';
@@ -25,6 +30,9 @@ export const authSlice = createSlice({
   reducers: {
     logout: () => {
       return initialState;
+    },
+    setSelectedCategories: (state, action) => {
+      state.selectedCategories = action.payload;
     },
   },
   extraReducers: builder => {
@@ -53,11 +61,22 @@ export const authSlice = createSlice({
     builder.addCase(signIn.rejected, (state, _) => {
       state.isLoading = false;
     });
+
+    builder.addCase(getCategories.pending, (state, _) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getCategories.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.categories = action.payload || [];
+    });
+    builder.addCase(getCategories.rejected, (state, _) => {
+      state.isLoading = false;
+    });
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { logout } = authSlice.actions;
+export const { logout, setSelectedCategories } = authSlice.actions;
 
 const authPersistConfig = {
   key: 'auth',

@@ -29,3 +29,12 @@ export type signInResponse = {
   refreshToken: string;
   message?: string;
 };
+
+export type getCategoriesPayload = {};
+
+export type category = {
+  id: string;
+  name: string;
+};
+
+export type getCategoriesResponse = category[];

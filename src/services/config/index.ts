@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { store } from '@/redux/store';
 import { create } from 'apisauce';
 
 export const BASE_URL = 'http://streaming.nexlesoft.com:3001/';
@@ -6,12 +6,12 @@ const api = create({
   baseURL: BASE_URL,
 });
 
-api.addAsyncRequestTransform(request => async () => {
-  const authToken = await AsyncStorage.getItem('TOKEN');
-  if (!authToken) {
-    return;
+api.axiosInstance.interceptors.request.use(config => {
+  const token = store.getState().authReducer.accessToken;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-  // request.headers?.Authorization = 'Bearer ' + authToken;
+  return config;
 });
 
 export default api;
