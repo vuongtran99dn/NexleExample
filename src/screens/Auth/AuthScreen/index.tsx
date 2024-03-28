@@ -10,6 +10,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useAppDispatch } from '@/redux/hooks';
 import { signIn, signUp } from '@/redux/thunks/authThunk';
 import { showToastMessage } from '@/functions';
+import { regexEmail } from './constant';
 
 type formData = {
   email: string;
@@ -61,7 +62,7 @@ const AuthScreen = ({}) => {
         required
         rules={{
           pattern: {
-            value: /\S+@\S+\.\S+/,
+            value: regexEmail,
             message: 'Entered value does not match email format',
           },
         }}
@@ -73,7 +74,11 @@ const AuthScreen = ({}) => {
         isSecure
         errors={errors}
         required
-        rules={{ minLength: { value: 8, message: 'This field must be at least 8 characters' } }}
+        maxLength={19}
+        rules={{
+          minLength: { value: 6, message: 'This field must be at least 6 characters' },
+          maxLength: { value: 18, message: 'This field max 18 characters' },
+        }}
       />
       {!isSignIn && (
         <>

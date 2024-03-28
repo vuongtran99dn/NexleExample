@@ -14,8 +14,18 @@ interface appTextInputProps {
   errors?: any;
   rules?: RegisterOptions<any>;
   required?: boolean;
+  maxLength?: number;
 }
-const AppTextInput: React.FC<appTextInputProps> = ({ control, name, title, isSecure, errors, rules, required }) => {
+const AppTextInput: React.FC<appTextInputProps> = ({
+  control,
+  name,
+  title,
+  isSecure,
+  errors,
+  rules,
+  required,
+  maxLength,
+}) => {
   const watch = useWatch({ control, name });
 
   const titleLocation = useRef(new Animated.Value(40)).current;
@@ -59,6 +69,7 @@ const AppTextInput: React.FC<appTextInputProps> = ({ control, name, title, isSec
                   ref={textInputRef}
                   style={styles.textInput}
                   value={value}
+                  maxLength={maxLength}
                   onChangeText={onChange}
                   onFocus={() => {
                     if (value === '') {

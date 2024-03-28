@@ -1,4 +1,5 @@
-const levelPassword: { [x: number]: { level: number; strengthLevel: string; color: string } } = {
+const levelPassword: { [x: number]: { level: number; strengthLevel: string; color?: string } } = {
+  0: { level: 0, strengthLevel: '', color: undefined },
   1: { level: 1, strengthLevel: 'Wear', color: '#E05151' },
   2: { level: 2, strengthLevel: 'Fair', color: '#E3A063' },
   3: { level: 3, strengthLevel: 'Good', color: '#647FFF' },
@@ -6,8 +7,8 @@ const levelPassword: { [x: number]: { level: number; strengthLevel: string; colo
 };
 
 export const checkPasswordStrength = (password: string) => {
-  if (password.length < 8) {
-    return {};
+  if (password.length < 6) {
+    return levelPassword[0];
   }
   const hasLowerCase = /[a-z]/.test(password);
   const hasUpperCase = /[A-Z]/.test(password);

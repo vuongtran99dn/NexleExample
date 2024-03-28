@@ -9,6 +9,7 @@ import { logout, setSelectedCategories } from '@/redux/slices/authSlice';
 import { getCategories } from '@/redux/thunks/authThunk';
 import { ItemCatogory } from './components';
 import { category } from '@/services/api/authApi/types';
+import { showToastMessage } from '@/functions';
 
 const WelcomeScreen = ({ navigation }) => {
   const dispach = useAppDispatch();
@@ -29,6 +30,10 @@ const WelcomeScreen = ({ navigation }) => {
         rightComponent={
           <TouchableOpacity
             onPress={() => {
+              if (listItemSelected.current.length === 0) {
+                showToastMessage('Choose at least 1 category');
+                return;
+              }
               dispach(setSelectedCategories(listItemSelected.current));
               navigation.navigate('HomeScreen');
             }}
