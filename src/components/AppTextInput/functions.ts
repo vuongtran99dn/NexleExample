@@ -13,7 +13,8 @@ export const checkPasswordStrength = (password: string) => {
   const hasUpperCase = /[A-Z]/.test(password);
   const hasNumeric = /\d/.test(password);
   const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
-  let level = 1;
+  let level = 0;
+  (hasLowerCase || hasUpperCase) && level++;
   hasLowerCase && hasUpperCase && level++;
   hasNumeric && level++;
   hasSpecialChar && level++;
