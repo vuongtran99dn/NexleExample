@@ -2,8 +2,9 @@
 
 ## Sign In
 
-<!-- ![sign in](./screenshot/sign_in.png) -->
-<img src="./screenshot/sign_in.png" width="324" height="324">
+![sign in](./screenshot/sign_in.png)
+
+<!-- <img src="./screenshot/sign_in.png" width="324" height="324"> -->
 
 ## Sign Up
 
