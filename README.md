@@ -2,7 +2,7 @@
 
 ## Sign In
 
-![sign in](./screenshot/sign_in.png)
+![sign in](./screenshot/sign_in.png){: width="50%"}
 
 ## Sign Up
 
